@@ -79,12 +79,9 @@ function initMindMap() {
     // Set dimensions
     const width = window.innerWidth;
     const height = window.innerHeight;
-    const margin = {
-        top: 20,
-        right: 120,
-        bottom: 20,
-        left: 120
-    };
+
+    // Determine if we're on mobile
+    const isMobile = width < 768;
 
     // Create the SVG container
     svg = d3.select("#mindmap-container")
@@ -105,16 +102,111 @@ function initMindMap() {
 
     svg.call(zoom);
 
-    // Create a tree layout
-    const tree = d3.tree()
-        .size([height - margin.top - margin.bottom, width / 2 - margin.right - margin.left])
-        .separation((a, b) => (a.parent === b.parent ? 1 : 1.5));
-
-    // Convert data to hierarchy
+    // Create a hierarchy from the data
     const root = d3.hierarchy(data);
 
-    // Assign positions to nodes
-    tree(root);
+    // Determine the layout based on device
+    if (isMobile) {
+        // For mobile: Use a vertical tree layout with more spacing
+        createVerticalLayout(root, width, height);
+    } else {
+        // For desktop: Use a horizontal tree layout
+        createHorizontalLayout(root, width, height);
+    }
+
+    // Center the view
+    resetView();
+
+    // Hide loading indicator
+    document.getElementById('loading').style.display = 'none';
+}
+
+function createVerticalLayout(root, width, height) {
+    // For mobile, we use a top-to-bottom tree layout
+    const treeLayout = d3.tree()
+        .size([width * 0.8, height * 0.6])
+        .separation((a, b) => {
+            // Increase separation between nodes
+            return (a.parent === b.parent ? 1.5 : 2.5);
+        });
+
+    // Apply the layout
+    treeLayout(root);
+
+    // Create links
+    const links = g.selectAll(".link")
+        .data(root.links())
+        .enter()
+        .append("path")
+        .attr("class", "link")
+        .attr("d", d3.linkVertical()
+            .x(d => d.x)
+            .y(d => d.y));
+
+    // Create nodes
+    const nodes = g.selectAll(".node")
+        .data(root.descendants())
+        .enter()
+        .append("g")
+        .attr("class", "node")
+        .attr("transform", d => `translate(${d.x}, ${d.y})`)
+        .on("click", (event, d) => {
+            event.stopPropagation();
+            if (d.data.id) {
+                openPanel(d.data.id);
+            }
+
+            // Zoom to the clicked node
+            if (!d.data.id) return;
+
+            const scale = 1.5;
+            const x = -d.x * scale + width / 2;
+            const y = -d.y * scale + height / 2;
+
+            svg.transition()
+                .duration(750)
+                .call(
+                    zoom.transform,
+                    d3.zoomIdentity
+                    .translate(x, y)
+                    .scale(scale)
+                );
+        });
+
+    // Add circles to nodes
+    nodes.append("circle")
+        .attr("r", d => d.data.name === "AI di Educourse.id" ? 12 : 8)
+        .style("fill", d => d.data.name === "AI di Educourse.id" ? "#4338ca" : "#4f46e5");
+
+    // Add text backgrounds for better readability
+    nodes.append("rect")
+        .attr("class", "node-label-bg")
+        .attr("x", -5)
+        .attr("y", 10)
+        .attr("width", d => d.data.name.length * 6 + 10)
+        .attr("height", 20)
+        .attr("opacity", 0.8);
+
+    // Add labels to nodes
+    nodes.append("text")
+        .attr("dy", "2em")
+        .attr("text-anchor", "middle")
+        .text(d => d.data.name);
+
+    // Add pulsing effect to the root node
+    nodes.filter(d => d.data.name === "AI di Educourse.id")
+        .select("circle")
+        .classed("animated-icon", true);
+}
+
+function createHorizontalLayout(root, width, height) {
+    // For desktop, we use a left-to-right tree layout
+    const treeLayout = d3.tree()
+        .size([height * 0.8, width * 0.4])
+        .separation((a, b) => (a.parent === b.parent ? 1 : 1.5));
+
+    // Apply the layout
+    treeLayout(root);
 
     // Create links
     const links = g.selectAll(".link")
@@ -134,12 +226,13 @@ function initMindMap() {
         .attr("class", "node")
         .attr("transform", d => `translate(${d.y}, ${d.x})`)
         .on("click", (event, d) => {
+            event.stopPropagation();
             if (d.data.id) {
                 openPanel(d.data.id);
             }
 
             // Zoom to the clicked node
-            if (!d.data.id) return; // Skip if it's the root node
+            if (!d.data.id) return;
 
             const scale = 1.5;
             const x = -d.y * scale + width / 2;
@@ -171,9 +264,6 @@ function initMindMap() {
     nodes.filter(d => d.data.name === "AI di Educourse.id")
         .select("circle")
         .classed("animated-icon", true);
-
-    // Center the view
-    resetView();
 }
 
 function openPanel(id) {
@@ -214,6 +304,10 @@ function resetView() {
 
     const width = window.innerWidth;
     const height = window.innerHeight;
+    const isMobile = width < 768;
+
+    // Adjust scale based on device
+    const scale = isMobile ? 0.4 : 0.8;
 
     svg.transition()
         .duration(750)
@@ -221,15 +315,54 @@ function resetView() {
             zoom.transform,
             d3.zoomIdentity
             .translate(width / 2, height / 2)
-            .scale(0.8)
+            .scale(scale)
         );
 }
 
 // Handle window resize
 window.addEventListener('resize', function () {
     if (svg) {
-        svg.attr("width", window.innerWidth)
-            .attr("height", window.innerHeight);
-        resetView();
+        // Remove existing SVG and recreate
+        d3.select("#mindmap-container svg").remove();
+        initMindMap();
     }
+});
+
+// Add touch support for mobile
+let touchStartX, touchStartY;
+
+document.addEventListener('touchstart', function (e) {
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+});
+
+document.addEventListener('touchend', function (e) {
+    if (!touchStartX || !touchStartY) return;
+
+    const touch = e.changedTouches[0];
+    const diffX = touchStartX - touch.clientX;
+    const diffY = touchStartY - touch.clientY;
+
+    // If it's a small movement, it might be a tap rather than a swipe
+    if (Math.abs(diffX) < 10 && Math.abs(diffY) < 10) {
+        return;
+    }
+
+    // Handle swipe for panning
+    if (svg) {
+        const currentTransform = d3.zoomTransform(svg.node());
+        const newX = currentTransform.x - diffX;
+        const newY = currentTransform.y - diffY;
+
+        svg.call(
+            zoom.transform,
+            d3.zoomIdentity
+            .translate(newX, newY)
+            .scale(currentTransform.k)
+        );
+    }
+
+    touchStartX = null;
+    touchStartY = null;
 });
