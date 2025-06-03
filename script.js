@@ -7,41 +7,41 @@ const data = {
             children: []
         },
         {
-            name: "Pengenalan AI",
+            name: "Pengenalan",
             id: "pengenalan",
             children: []
         },
         {
-            name: "Penggunaan AI",
+            name: "Penggunaan",
             children: [{
-                    name: "Menyederhanakan Bahasa",
+                    name: "Bahasa",
                     id: "bahasa",
                     children: []
                 },
                 {
-                    name: "Mencari Ide Materi",
+                    name: "Materi",
                     id: "ide",
                     children: []
                 },
                 {
-                    name: "Masalah Teknis",
+                    name: "Teknis",
                     id: "teknis",
                     children: []
                 },
                 {
-                    name: "Website Sederhana",
+                    name: "Website",
                     id: "website",
                     children: []
                 },
                 {
-                    name: "Membuat Quiz",
+                    name: "Quiz",
                     id: "quiz",
                     children: []
                 }
             ]
         },
         {
-            name: "Tips & Etika",
+            name: "Etika",
             id: "tips",
             children: []
         },
