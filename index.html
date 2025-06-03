@@ -1,0 +1,286 @@
+<html lang="id"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI: Asisten Pintar di Balik Layar Educourse.id</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Intro Panel -->
+    <div class="intro-panel" id="intro-panel">
+        <h2>AI: Asisten Pintar di Balik Layar Educourse.id</h2>
+        <p>Selamat datang di presentasi interaktif tentang penggunaan AI di Educourse.id. Klik pada node-node di mind map untuk melihat detail informasi.</p>
+        <button class="start-btn" id="start-btn">Mulai Eksplorasi</button>
+    </div>
+    
+    <!-- Mind Map Container -->
+    <div id="mindmap-container"></div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Detail Panels -->
+    <div class="detail-panel" id="panel-pembukaan">
+        <button class="close-btn" onclick="closePanel()">×</button>
+        <h2>Pembukaan</h2>
+        <div class="card">
+            <h3>Perkenalan</h3>
+            <p>Muhammad Hardiansyah, Coding Teacher di Educourse.id</p>
+        </div>
+        <div class="card">
+            <h3>Tujuan Sharing Session</h3>
+            <ul>
+                <li>Menjelaskan bagaimana AI bisa menjadi alat bantu kerja sehari-hari</li>
+                <li>Memberikan inspirasi penggunaan AI secara praktis</li>
+            </ul>
+        </div>
+        <div class="quote">
+            "Menggunakan AI bukanlah sebuah kecurangan, tetapi sebuah kecerdikan."
+        </div>
+    </div>
+    
+    <div class="detail-panel" id="panel-pengenalan">
+        <button class="close-btn" onclick="closePanel()">×</button>
+        <h2>Pengenalan Singkat AI</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Apa itu AI?</h3>
+                <p>Teknologi yang memungkinkan komputer belajar dari data dan membuat keputusan atau prediksi</p>
+            </div>
+            <div class="card">
+                <h3>AI Sehari-hari</h3>
+                <p>ChatGPT, Copilot, Bard, dan berbagai asisten AI yang kita gunakan</p>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Prinsip Dasar</h3>
+            <p>AI bukan sulap, tapi alat bantu berbasis data yang telah dilatih sebelumnya</p>
+        </div>
+    </div>
+    
+    <div class="detail-panel" id="panel-bahasa">
+        <button class="close-btn" onclick="closePanel()">×</button>
+        <h2>Menyederhanakan Bahasa</h2>
+        <p>Salah satu penggunaan AI di Educourse.id adalah untuk menyederhanakan bahasa teknis menjadi bahasa yang mudah dipahami oleh orang tua siswa.</p>
+        <div class="card">
+            <h3>Tools</h3>
+            <div>
+                <span class="highlight">ChatGPT</span>
+                <span class="highlight">Gemini AI</span>
+                <span class="highlight">Deepseek</span>
+                <span class="highlight">Quilbot</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Contoh Penggunaan</h3>
+            <p><strong>Input ke AI:</strong><br>
+            "Siswa akan mempelajari konsep algoritma looping dan implementasinya dalam pemrograman blok."</p>
+            <p><strong>Hasil dari AI:</strong><br>
+            "Anak-anak akan belajar cara memecahkan masalah dengan langkah berulang, seperti saat mereka menyusun blok mainan mengikuti pola tertentu."</p>
+        </div>
+        <div class="card">
+            <h3>Manfaat</h3>
+            <ul>
+                <li>Komunikasi lebih efektif dengan orang tua</li>
+                <li>Menghemat waktu dalam menyusun penjelasan</li>
+                <li>Meningkatkan pemahaman orang tua tentang materi pembelajaran</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="detail-panel" id="panel-ide">
+        <button class="close-btn" onclick="closePanel()">×</button>
+        <h2>Mencari Ide Materi</h2>
+        <p>AI dapat membantu dalam brainstorming topik pembelajaran baru atau kreatif untuk siswa Educourse.id.</p>
+        <div class="card">
+            <h3>Tools</h3>
+            <div>
+                <span class="highlight">ChatGPT</span>
+                <span class="highlight">Gemini AI</span>
+                <span class="highlight">Deepseek</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Contoh Penggunaan</h3>
+            <p>Meminta AI untuk memberikan ide-ide aktivitas coding untuk anak-anak Sekolah Dasar kelas 3-4.</p>
+        </div>
+        <div class="card">
+            <h3>Hasil yang Didapat</h3>
+            <ul>
+                <li>Ide tantangan coding yang sesuai dengan tingkat kemampuan siswa</li>
+                <li>Konsep games edukatif yang dapat dikembangkan</li>
+                <li>Variasi proyek yang dapat disesuaikan dengan minat siswa</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Manfaat</h3>
+            <p>Menghemat waktu riset dan memastikan materi pembelajaran tetap relevan dan menarik bagi siswa.</p>
+        </div>
+    </div>
+    
+    <div class="detail-panel" id="panel-teknis">
+        <button class="close-btn" onclick="closePanel()">×</button>
+        <h2>Menyelesaikan Masalah Teknis</h2>
+        <p>AI dapat membantu menyelesaikan masalah teknis yang muncul saat menggunakan Makecode Zoombit atau platform lainnya.</p>
+        <div class="card">
+            <h3>Tools</h3>
+            <div>
+                <span class="highlight">ChatGPT</span>
+                <span class="highlight">Gemini AI</span>
+                <span class="highlight">Deepseek</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Contoh Penggunaan</h3>
+            <p>Menanyakan solusi untuk error atau bug yang muncul saat siswa mengerjakan proyek coding.</p>
+        </div>
+        <div class="card">
+            <h3>Jenis Masalah yang Dapat Diselesaikan</h3>
+            <ul>
+                <li>Syntax error dalam kode</li>
+                <li>Fungsi yang tidak berjalan sesuai harapan</li>
+                <li>Logika pemrograman yang perlu diperbaiki</li>
+                <li>Optimasi kode untuk performa lebih baik</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Manfaat</h3>
+            <p>Problem-solving menjadi lebih efisien, sehingga waktu pembelajaran dapat dimanfaatkan dengan lebih optimal.</p>
+        </div>
+    </div>
+    
+    <div class="detail-panel" id="panel-website">
+        <button class="close-btn" onclick="closePanel()">×</button>
+        <h2>Membuat Karya Website Sederhana</h2>
+        <p>AI dapat membantu dalam pembuatan website sederhana untuk berbagai keperluan di Educourse.id.</p>
+        <div class="card">
+            <h3>Tools</h3>
+            <div>
+                <span class="highlight">ChatGPT</span>
+                <span class="highlight">Gemini AI</span>
+                <span class="highlight">Deepseek</span>
+                <span class="highlight">Canva AI</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Contoh Proyek</h3>
+            <div>
+                <span class="highlight">Website absensi</span>
+                <span class="highlight">Katalog kegiatan</span>
+                <span class="highlight">Portfolio siswa</span>
+                <span class="highlight">Quiz interaktif</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Cara Penggunaan</h3>
+            <p>Mendeskripsikan kebutuhan website ke AI, yang kemudian akan menghasilkan kode HTML, CSS, dan JavaScript dasar yang dapat dikustomisasi lebih lanjut.</p>
+        </div>
+        <div class="card">
+            <h3>Manfaat</h3>
+            <ul>
+                <li>Mempercepat pembuatan prototipe</li>
+                <li>Memudahkan pembuatan alat bantu pembelajaran</li>
+                <li>Memberikan inspirasi desain dan fungsionalitas</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="detail-panel" id="panel-quiz">
+        <button class="close-btn" onclick="closePanel()">×</button>
+        <h2>Membuat Soal Quiz atau Ujian</h2>
+        <p>AI dapat membantu dalam pembuatan soal yang dapat digunakan untuk quiz.</p>
+        <div class="card">
+            <h3>Alat yang dapat digunakan</h3>
+            <div>
+                <span class="highlight">ChatGPT</span>
+                <span class="highlight">Gemini AI</span>
+                <span class="highlight">Quiziz AI</span>
+                <span class="highlight">Lainnya</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Cara Penggunaan</h3>
+            <p>Mendeskripsikan kebutuhan quiz untuk pelajaran apa, kelas anak-anaknya, tingkat kesulitan, dan jenis soal yang diharapkan.</p>
+        </div>
+        <div class="card">
+            <h3>Manfaat</h3>
+            <ul>
+                <li>Mempercepat proses pembuatan soal</li>
+                <li>Tingkat kesulitan soal dapat sesuai dengan kebutuhan</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="detail-panel" id="panel-tips">
+        <button class="close-btn" onclick="closePanel()">×</button>
+        <h2>Tips &amp; Etika Menggunakan AI</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Alat Bantu, Bukan Pengganti</h3>
+                <p>Gunakan AI sebagai asisten, tetap gunakan pemikiran kritis Anda dalam mengevaluasi hasilnya.</p>
+            </div>
+            <div class="card">
+                <h3>Evaluasi Hasil</h3>
+                <p>AI tidak selalu 100% benar, selalu periksa dan validasi hasilnya sebelum digunakan.</p>
+            </div>
+            <div class="card">
+                <h3>Keamanan Data</h3>
+                <p>Jangan masukkan data sensitif atau informasi pribadi siswa ke AI publik.</p>
+            </div>
+        </div>
+        <div class="quote" style="background-color: #fef3c7; color: #92400e;">
+            Ingat: AI adalah alat yang sangat berguna, tapi tetap membutuhkan pengawasan dan penilaian manusia untuk hasil terbaik.
+        </div>
+    </div>
+    
+    <div class="detail-panel" id="panel-penutup">
+        <button class="close-btn" onclick="closePanel()">×</button>
+        <h2>Penutup &amp; Diskusi</h2>
+        <div class="card">
+            <h3>Ringkasan Poin Utama</h3>
+            <ul>
+                <li>AI adalah alat bantu yang mempercepat proses kerja</li>
+                <li>Berbagai penggunaan praktis di Educourse.id</li>
+                <li>Tips &amp; etika penggunaan yang bertanggung jawab</li>
+            </ul>
+        </div>
+        <div class="card" style="background-color: #ede9fe;">
+            <h3>Mari Mulai Menggunakan AI!</h3>
+            <p>Cobalah menggunakan AI untuk membantu pekerjaan Anda sesuai kebutuhan. Mulai dari hal sederhana dan tingkatkan seiring waktu.</p>
+        </div>
+        <div class="card">
+            <h3>Sesi Tanya Jawab</h3>
+            <p>Silakan ajukan pertanyaan atau berbagi pengalaman Anda menggunakan AI dalam pekerjaan sehari-hari.</p>
+        </div>
+    </div>
+    
+    <!-- Controls -->
+    <div class="controls">
+        <button class="control-btn" id="zoom-in" title="Perbesar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+        </button>
+        <button class="control-btn" id="zoom-out" title="Perkecil">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+        </button>
+        <button class="control-btn" id="reset" title="Reset">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'949ef02644db9aaf',t:'MTc0ODk1MTA2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
+
+</body></html>
