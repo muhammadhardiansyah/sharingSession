@@ -1,6 +1,6 @@
 // Mind map data
 const data = {
-    name: "AI di Educourse.id",
+    name: "AI",
     children: [{
             name: "Pembukaan",
             id: "pembukaan",
